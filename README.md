@@ -219,7 +219,7 @@ All API endpoints are prefixed with: `http://localhost:<portnumber>`.
   {}
   ```
 - **Response:**
-   -**Success (200):**
+-  -**Success (200):**
     ```json
     {
       "emails":[
@@ -249,7 +249,7 @@ All API endpoints are prefixed with: `http://localhost:<portnumber>`.
   }
   ```
   - **Response**
-  - **Success (200):**
+-  - **Success (200):**
     ```json
     {
      "emails":[
@@ -277,7 +277,7 @@ All API endpoints are prefixed with: `http://localhost:<portnumber>`.
   {}
   ```
 - **Response:**
-   -**Success (200):**
+-  -**Success (200):**
     ```json
     {
      "emails":[
