@@ -8,7 +8,7 @@ All API endpoints are prefixed with: `http://localhost:<portnumber>`.
 
 ### 1). Schedule single Email
 
-- **URL:** `/email/send`
+- **URL:** `/email/schedule`
 - **Method:** `POST`
 - **Request Body:**
   ```json
