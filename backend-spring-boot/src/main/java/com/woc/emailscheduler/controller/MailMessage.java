@@ -1,7 +1,7 @@
-package com.example.first.controller;
+package com.woc.emailscheduler.controller;
 
-import com.example.first.EmailRequest;
-import com.example.first.EmailSender;
+import com.woc.emailscheduler.EmailRequest;
+import com.woc.emailscheduler.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

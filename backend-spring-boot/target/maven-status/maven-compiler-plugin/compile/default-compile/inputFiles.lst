@@ -1,1 +1,5 @@
-/Users/arman_gupta/Documents/GitHub/email-scheduler/backend-spring-boot/src/main/java/com/woc/emailscheduler/EmailschedulerApplication.java
+/Users/arman_gupta/Documents/GitHub/email-scheduler/backend-spring-boot/src/main/java/com/woc/emailscheduler/Application.java
+/Users/arman_gupta/Documents/GitHub/email-scheduler/backend-spring-boot/src/main/java/com/woc/emailscheduler/EmailRequest.java
+/Users/arman_gupta/Documents/GitHub/email-scheduler/backend-spring-boot/src/main/java/com/woc/emailscheduler/EmailSender.java
+/Users/arman_gupta/Documents/GitHub/email-scheduler/backend-spring-boot/src/main/java/com/woc/emailscheduler/MailConfig.java
+/Users/arman_gupta/Documents/GitHub/email-scheduler/backend-spring-boot/src/main/java/com/woc/emailscheduler/controller/MailMessage.java

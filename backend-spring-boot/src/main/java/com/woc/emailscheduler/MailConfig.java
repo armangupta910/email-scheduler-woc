@@ -1,4 +1,4 @@
-package com.example.first;
+package com.woc.emailscheduler;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +16,8 @@ public class MailConfig {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("b23es1033@iitj.ac.in");
-        mailSender.setPassword("YOURPASSWORD");
+        mailSender.setUsername("YOUR_EMAIL");
+        mailSender.setPassword("YOUR_PASSWORD");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

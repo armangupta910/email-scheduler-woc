@@ -1,6 +1,6 @@
-package com.example.first;
+package com.woc.emailscheduler;
 
-import com.example.first.controller.MailMessage;
+import com.woc.emailscheduler.controller.MailMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,7 +17,7 @@ public class EmailSender {
 		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(text);
-		message.setFrom("b23es1033@iitj.ac.in");
+		message.setFrom("YOUR_EMAIL");
 		mailSender.send(message);
 	}
 }

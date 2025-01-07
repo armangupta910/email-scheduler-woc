@@ -1,4 +1,4 @@
-package com.example.first;
+package com.woc.emailscheduler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

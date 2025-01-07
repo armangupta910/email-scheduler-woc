@@ -1,4 +1,4 @@
-package com.example.first;
+package com.woc.emailscheduler;
 
 public class EmailRequest {
     private String company;
