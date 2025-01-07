@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stylepg1.css" />
+</head>
+<body>
+    <div class="heading">
+ 
+        <h1>E-mail Scheduler</h1>
+    </div>
+    <div class="dashboard-container">
+        <h1 style="text-align: center; color: blue;">Dashboard</h1>
+        <div class="cards-container">
+          <div class="card">
+            <p>Total Scheduled Emails</p>
+            <h2>0</h2>
+          </div>
+          <div class="card">
+            <p>Pending Emails</p>
+            <h2>0</h2>
+          </div>
+          <div class="card">
+            <p>Sent Emails</p>
+            <h2>0</h2>
+          </div>
+          <div class="card">
+            <p>Failed Emails</p>
+            <h2>0</h2>
+          </div>
+        </div>
+      </div>
+    <div class="all">
+    <div class="inputdata">
+     <h2 style="text-align: center;">Schedule a Single Email</h2>
+     <label>Company Name</label><br/>
+     <input type="text" class="textbox" id="companyName" placeholder="Enter company name" oninput="updateMail()"/><br/><br/>
+     <label>Recipient Name</label><br/>
+     <input type="text" class="textbox" id="recipientName" placeholder="Enter Recipient name " oninput="updateMail()"/><br/><br/>
+     <label>Salutation</label><br/>
+     <input type="text" class="textbox" id="salutation"placeholder="Enter Salutation" oninput="updateMail()"/><br/><br/>
+     <label>Name</label><br/>
+     <input type="text" class="textbox" id="senderName" placeholder="Enter Name" oninput="updateMail()"/><br/><br/>
+     <label>Designation</label><br/>
+     <input type="text" class="textbox" id="designation" placeholder="Enter Designation" oninput="updateMail()"/><br/><br/>
+     <label>Phone Number</label><br/>
+     <input type="number" class="textbox" id="phoneNumber" placeholder="Enter Phone Number" oninput="updateMail()"/><br/><br/>
+     <label for="date">Select a date:</label>
+     <input type="date" id="date" name="date" required>
+     <br><br>
+     <label for="time">Select a time:</label>
+     <input type="time" id="time" name="time" required>
+     <br><br>
+     <button type="submit" onclick="scheduleMail()" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Schedule the Mail</button>
+    
+    <h2>OR</h2>
+    
+     <h3>Schedule Bulk Emails via Excel</h3>
+     <h4>Scroll to refer format of Excel File</h4>
+     
+     <label>Excel File</label><br/>
+      <input type="text" class="textbox" placeholder="Enter link to excel file"/><br/><br/>
+      <button type="submit" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">SUBMIT</button>
+    </div>
+    <div class="email">
+        <h2 style="text-align: center;">SAMPLE MAIL</h2>
+        <span id="dynamicSalutaion">[Dear Sir/Madam]</span>,<br>
+
+Greetings from IIT Jodhpur!<br>
+<br>
+On behalf of the Placement Cell at IIT Jodhpur, I, <span id="dynamicSenderName">[Your Name]</span>, <span id="dynamicDesignation">[Your Designation]</span>, take this opportunity to invite <span id="dynamicCompanyName">[Company Name]</span> to participate in our campus placement and internship season for the 2025 and 2026 batches, respectively.
+<br>
+Since its inception in 2008, IIT Jodhpur has achieved several milestones and has always strived to push its limits in all spheres. The institute has a large pool of talented students pursuing their interests through a wide range of academic programs. Notably, IIT Jodhpur secured the 29th rank in NIRF 2024.
+<br>
+IIT Jodhpur stands out with its Industry 4.0 curriculum, interdisciplinary projects, and mandatory courses in Machine Learning and Data Structures for all branches. Our students are actively engaged in various tech and non-tech clubs ensuring they are well-rounded and industry-ready.
+<br>
+Why Collaborate with IIT Jodhpur?<br>
+<strong>Qualified Talent Pool:</strong> Our students undergo rigorous training and excel both academically and practically.<br>
+<strong>Diverse Skill Sets:</strong> Programs offered include B.Tech, BS, M.Tech, M.Sc, Ph.D., and dual degrees across various departments.<br>
+<strong>Innovative Learning:</strong> Our curriculum is updated with the latest industry trends and technologies, focusing on emerging domains like Artificial Intelligence, IoT, and Computational Sciences.<br>
+<strong>Interdisciplinary Projects & Research:</strong> Students engage in projects that integrate multiple disciplines, preparing them for complex industry challenges.<br>
+<strong>Active Clubs:</strong> Tech and non-tech clubs, such as Product, DevLup Labs, RAID, Robotics Society, and E-Cell, contribute to the holistic development of our students.<br>
+<h2 style="text-align: center;">PLACEMENTS</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Programs Offered</th>
+            <th>Available Batch Strength</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>B.Tech</td>
+            <td>440</td>
+        </tr>
+        <tr>
+            <td>M.Tech</td>
+            <td>210</td>
+        </tr>
+        <tr>
+            <td>M.Sc</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td>Tech MBA</td>
+            <td>80</td>
+        </tr>
+    </tbody>
+</table>
+<h2 style="text-align: center;">INTERNSHIPS</h2>
+<table  class="table">
+    <thead>
+        <tr>
+            <th>Programs Offered</th>
+            <th>Available Batch Strength</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>B.Tech</td>
+            <td>500</td>
+        </tr>
+        <tr>
+            <td>Tech MBA</td>
+            <td>120</td>
+        </tr>
+    </tbody>
+</table>
+For more details, please find the brochure attached. We invite you to consider our students for both technical and non-technical roles. Kindly fill out and return the attached Job (JAF) / Internship (IAF) Announcement Form to expedite the process.
+<br>
+We look forward to a long-term relationship with your organization. For any queries, feel free to contact me or our team.<br>
+<br>
+Warm Regards,<br>
+<span id="dynamicSenderNameFooter">[Your Name]</span><br>
+<span id="dynamicDesignationFooter">[Your Designation]</span><br>
+Career Development Cell | IIT Jodhpur<br>
+Contact: <span id="dynamicPhoneNumber">[Your Phone Number]</span><br>
+<br>
+Alternate Contact -<br>
+Puneet Garg<br>
+Training & Placement Officer<br>
+Career Development Cell | IIT Jodhpur<br>
+Contact : +91 9815964823 , 0291-2801155<br>
+    </p>
+    </div>
+    </div>
+
+<div class="multiplemail">
+    <h3>Schedule Bulk Emails via Excel</h3>
+    <h4>Your Excel file should be in this format</h4>
+    <img src="img.jpg" alt="Description of image" width="500"><br>
+    <br>
+    <label>Excel File</label><br/>
+     <input type="text" class="textbox" placeholder="Enter link to excel file"/><br/><br/>
+     <br>
+     <button type="submit" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">SUBMIT</button>
+</div>
+
+<script>
+    function updateMail() {
+        const companyName = document.getElementById("companyName").value || "[Company Name]";
+        const recipientName = document.getElementById("recipientName").value || "[Recipient Name]";
+        const salutation = document.getElementById("salutation").value || "[Dear Sir/Madam]";
+        const senderName = document.getElementById("senderName").value || "[Your Name]";
+        const designation = document.getElementById("designation").value || "[Your Designation]";
+        const phoneNumber = document.getElementById("phoneNumber").value || "[Your Phone Number]";
+        document.getElementById("dynamicCompanyName").textContent = companyName;
+        document.getElementById("dynamicSenderName").textContent = senderName;
+        document.getElementById("dynamicSenderNameFooter").textContent = senderName;
+        document.getElementById("dynamicDesignation").textContent = designation;
+        document.getElementById("dynamicDesignationFooter").textContent = designation;
+        document.getElementById("dynamicPhoneNumber").textContent = phoneNumber;
+        document.getElementById("dynamicSalutaion").textContent = salutation;
+    }
+
+    function scheduleMail() {
+        alert("Mail has been scheduled!");
+    }
+</script>
+</body>
+</html>
