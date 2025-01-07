@@ -116,7 +116,7 @@ All API endpoints are prefixed with: `http://localhost:<portnumber>`.
     {
       "message": "Failed to process the Excel file"
     }
-    ``'
+    ```
 
 ## Methods for the Dashboard
 
@@ -249,7 +249,7 @@ All API endpoints are prefixed with: `http://localhost:<portnumber>`.
   }
   ```
   - **Response**
--  - **Success (200):**
+  - **Success (200):**
     ```json
     {
      "emails":[
@@ -291,7 +291,7 @@ All API endpoints are prefixed with: `http://localhost:<portnumber>`.
        ]
     }
     ```
-    -**Error (400):**
+   -**Error (400):**
       ```json
      {
       "message": "Emails could not be fetched"
