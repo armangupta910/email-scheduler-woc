@@ -7,7 +7,6 @@ For further reference, please consider the following sections:
 * [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/3.4.1/maven-plugin)
 * [Create an OCI image](https://docs.spring.io/spring-boot/3.4.1/maven-plugin/build-image.html)
 * [Spring Web](https://docs.spring.io/spring-boot/3.4.1/reference/web/servlet.html)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/3.4.1/reference/using/devtools.html)
 
 ### Guides
 The following guides illustrate how to use some features concretely:
