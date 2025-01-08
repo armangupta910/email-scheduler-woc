@@ -17,12 +17,6 @@ public class ExelEmailsController{
     @Autowired
     private EmailSender emailSender; 
 
-    /**
-     * Endpoint to upload an Excel file and send emails
-     *
-     * @param file Multipart file containing Excel data
-     * @return Response indicating success or failure
-     */
     @PostMapping("/send")
     public ResponseEntity<String> sendEmailsViaExcel(@RequestParam("file") MultipartFile file){
         try {
