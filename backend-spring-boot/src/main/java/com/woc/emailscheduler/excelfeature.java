@@ -27,7 +27,7 @@ public class Excel{
                      
                        String to= toCell.getStringCellValue();
                        String subject= subjectCell.getStringCellValue();
-                       String body =bodyCell.getStringCellValue();
+                       String text =textCell.getStringCellValue();
                        EmailSender.sendSimpleEmail(to,subject,text);
                  }
            }
