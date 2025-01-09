@@ -1,0 +1,122 @@
+.single-mail-form-container {
+  top: 50px; 
+  left: 30px;
+  width: 350px;
+  background-color: #fff;
+  padding: 25px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.single-mail-form-container h2 {
+  text-align: left; 
+  color: #081b31;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.single-mail-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.single-mail-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 20px; 
+  font-weight: bold;
+}
+
+.single-mail-form input {
+  width: 100%;
+  padding: 20px;
+  font-size: 18px; 
+  height: 50px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.single-mail-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.single-mail-form button:hover {
+  background-color: #0056b3;
+}
+
+.email-options {
+  display: flex;
+  align-items: center; 
+  justify-content: flex-end;
+  gap: 10px; 
+  margin-top: 10px;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-switch .slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch input:checked + .slider {
+  transform: translateX(20px);
+  background-color: #007bff;
+}
+
+span {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .email-options {
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .single-mail-form-container {
+    position: relative;
+    margin: 20px auto;
+    left: 0;
+    right: 0;
+    width: 90%;
+  }
+
+  .single-mail-form-container h2 {
+    text-align: center;
+  }
+}
