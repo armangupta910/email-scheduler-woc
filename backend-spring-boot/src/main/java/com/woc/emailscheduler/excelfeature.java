@@ -1,6 +1,7 @@
 package com.woc.emailscheduler;
 
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.io.File;
@@ -19,23 +20,28 @@ public class excelfeature{
           try (FileInputStream fis = new FileInputStream(new File(filePath))){
                  Workbook workbook =WorkbookFactory.create(fis);
                  Sheet sheet =workbook.getSheetAt(0); 
-                 Iterator<Row> rows = sheet.iterator();
+                 Iterator<Row> rows =sheet.iterator();
               
                  while(rows.hasNext()){
                        Row row= rows.next();
                        Cell toCell = row.getCell(0); 
                        Cell subjectCell = row.getCell(1); 
                        Cell textCell = row.getCell(2); 
+                       if (toCell !=null && subjectCell !=null && textCell != null &&
+                             toCell.getCellType() == CellType.STRING &&
+                             subjectCell.getCellType() == CellType.STRING &&
+                             textCell.getCellType() == CellType.STRING) {
                      
-                       String to= toCell.getStringCellValue();
-                       String subject= subjectCell.getStringCellValue();
-                       String text =textCell.getStringCellValue();
-                       emailSender.sendSimpleEmail(to,subject,text);
+                                    String to= toCell.getStringCellValue();
+                                    String subject= subjectCell.getStringCellValue();
+                                    String text =textCell.getStringCellValue();
+                                    emailSender.sendSimpleEmail(to,subject,text);
+                       }
                  }
            }  catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("File not found: "+e.getMessage());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error reading file: "+e.getMessage());
         }
      }
  }
