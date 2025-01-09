@@ -49,6 +49,10 @@ public class ExelEmailsController{
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error sending emails: " + e.getMessage());
         }
+    }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error sending emails: " + e.getMessage());
+        }
     }
 }
 
