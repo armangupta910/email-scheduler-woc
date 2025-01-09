@@ -19,27 +19,28 @@ public class ExelEmailsController{
 
     @PostMapping("/send")
     public ResponseEntity<String> sendEmailsViaExcel(@RequestParam("file") MultipartFile file){
-        try {
+        try{
             if(!file.getOriginalFilename().endsWith(".xlsx")){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Failed to process the Excel file.");
             }
 
-            InputStream inputStream =file.getInputStream();
-            Workbook workbook= new XSSFWorkbook(inputStream);
-            Sheet sheet = workbook.getSheet("Sheet_Name");
+            try (InputStream inputStream =file.getInputStream();
+            Workbook workbook= new XSSFWorkbook(inputStream));
+            Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows=sheet.iterator();
-            rows.next();
+            //rows.next();
+            if (rows.hasNext()) rows.next();
 
             while(rows.hasNext()){
                 Row row = rows.next();
                 String to =row.getCell(0).getStringCellValue();
                 String subject =row.getCell(1).getStringCellValue();
                 String text =row.getCell(2).getStringCellValue();
-                emailSender.sendEmail(to,subject,text);
+                emailSender.sendSimpleEmail(to,subject,text);
             }
           
-            workbook.close();
+           // workbook.close();
             return ResponseEntity.ok("Bulk Emails sent successfully.");
 
         } catch(Exception e){
