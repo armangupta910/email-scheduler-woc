@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.util.Iterator;
 
 @Service
-public class Excel{
+public class excelfeature{
     
     @Autowired
     private EmailSender emailSender;
