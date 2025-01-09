@@ -30,7 +30,7 @@ public class excelfeature{
                        String to= toCell.getStringCellValue();
                        String subject= subjectCell.getStringCellValue();
                        String text =textCell.getStringCellValue();
-                       EmailSender.sendSimpleEmail(to,subject,text);
+                       emailSender.sendSimpleEmail(to,subject,text);
                  }
            }  catch (FileNotFoundException e) {
             throw new RuntimeException(e);
