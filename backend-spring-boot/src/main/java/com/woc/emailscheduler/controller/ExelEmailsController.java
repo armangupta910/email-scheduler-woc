@@ -26,7 +26,7 @@ public class ExelEmailsController{
             }
 
             try (InputStream inputStream =file.getInputStream();
-            Workbook workbook= new XSSFWorkbook(inputStream));
+                   Workbook workbook= new XSSFWorkbook(inputStream)){
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows=sheet.iterator();
             //rows.next();
@@ -46,7 +46,7 @@ public class ExelEmailsController{
         } catch(Exception e){
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error sending email " + e.getMessage());
+                    .body("Error sending emails: " + e.getMessage());
         }
     }
 }
