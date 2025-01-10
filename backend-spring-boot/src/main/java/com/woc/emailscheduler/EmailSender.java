@@ -17,7 +17,7 @@ public class EmailSender {
 		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(text);
-		message.setFrom("b22cs014@iitj.ac.in");
+		message.setFrom("YOUR_EMAIL");
 		mailSender.send(message);
 	}
 }
