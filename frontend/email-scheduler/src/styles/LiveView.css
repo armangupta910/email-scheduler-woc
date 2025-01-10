@@ -1,0 +1,112 @@
+.live-view {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  border: 1px solid #e1e1e1;
+  overflow-y: auto;
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.live-view h2 {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #081b31;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #081b31;
+}
+
+.live-view p {
+  margin: 0 0 15px;
+}
+
+.live-view ul {
+  margin-left: 20px;
+  list-style-type: disc;
+  margin-bottom: 15px;
+}
+
+.live-view table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.live-view table th,
+.live-view table td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.live-view table th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.live-view table td {
+  background-color: #ffffff;
+}
+
+.content-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.left-column, .right-column {
+  flex: 1;
+  min-width: 300px;
+  box-sizing: border-box;
+}
+
+.follow-up-email-preview {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.email-preview, .follow-up-email-preview {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1024px) {
+  .live-view {
+    width: 100%;
+  }
+
+  .left-column, .right-column {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .live-view {
+    max-height: 400px;
+    font-size: 0.85rem;
+    padding: 15px;
+  }
+
+  .live-view h2 {
+    font-size: 1.2rem;
+  }
+
+  .follow-up-email-preview {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .live-view {
+    max-height: 350px;
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+}
