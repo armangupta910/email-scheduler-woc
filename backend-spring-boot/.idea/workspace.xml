@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4225a6c5-cbc9-4989-b72a-86aebba98ced" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailSender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/MailConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/MailConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/MailMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/MailMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/service/ExcelService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/first/FirstApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/woc/emailscheduler/FirstApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2rQTmPhJHGhv3CvQnPc63uV5Ffn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;excel-feature&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/arman_gupta/Documents/GitHub/email-scheduler/backend-spring-boot&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="first" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.woc.emailscheduler.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4225a6c5-cbc9-4989-b72a-86aebba98ced" name="Changes" comment="" />
+      <created>1736490458103</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1736490458103</updated>
+      <workItem from="1736490459227" duration="203000" />
+      <workItem from="1736492963511" duration="19000" />
+      <workItem from="1736492985889" duration="25000" />
+      <workItem from="1736493014309" duration="152000" />
+      <workItem from="1736493184480" duration="110000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
