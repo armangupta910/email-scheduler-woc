@@ -1,0 +1,11 @@
+com\woc\emailscheduler\excelfeature.class
+com\woc\emailscheduler\Application.class
+com\woc\emailscheduler\EmailRequest.class
+com\woc\emailscheduler\MailConfig.class
+com\woc\emailscheduler\controller\EmailController.class
+com\woc\emailscheduler\controller\MailMessage.class
+com\woc\emailscheduler\model\scheduler.class
+com\woc\emailscheduler\service\email_save.class
+com\woc\emailscheduler\controller\ExelEmailsController.class
+com\woc\emailscheduler\EmailSender.class
+com\woc\emailscheduler\repository\EmailRepository.class
