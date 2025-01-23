@@ -2,16 +2,32 @@ import React, { useState } from "react";
 import "../styles/LoginPage.css";
 
 const LoginPage = ({ onLogin }) => {
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [designation, setDesignation] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = () => {
-    if (!email || !password) {
-      setError("Both fields are required.");
+    if (!email || !password || !name || !phoneNumber || !designation) {
+      setError("All fields are required.");
       return;
     }
-    onLogin(true);
+    if (email === "yash" && password === "123") {
+      setError(""); // Clear error
+      onLogin(true); // Notify parent of successful login
+    } else {
+      setError("Invalid email or password.");
+    }
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    const value = e.target.value;
+    // Allow only numbers
+    if (/^\d*$/.test(value)) {
+      setPhoneNumber(value);
+    }
   };
 
   return (
@@ -21,6 +37,20 @@ const LoginPage = ({ onLogin }) => {
         <p className="enter-details">Please enter your details</p>
 
         <div className="form-container">
+        <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
+          />
+
           <input
             type="email"
             placeholder="Email address"
@@ -34,12 +64,18 @@ const LoginPage = ({ onLogin }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
+          
+          <input
+            type="text"
+            placeholder="Designation"
+            value={designation}
+            onChange={(e) => setDesignation(e.target.value)}
+          />
 
           {error && <p className="error-message">{error}</p>}
 
           <button onClick={handleLogin} className="login-button">
-            Sign up
+            Login
           </button>
         </div>
       </div>

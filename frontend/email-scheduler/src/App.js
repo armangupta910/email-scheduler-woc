@@ -9,6 +9,7 @@ import LiveView from "./components/LiveView";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [sessionChecked, setSessionChecked] = useState(false); // Track if session check is complete
 
   // State to hold form data for live preview
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const App = () => {
     salutation: "",
     yourName: "",
     yourDesignation: "",
-    yourPhoneNumber: "", 
+    yourPhoneNumber: "",
   });
 
   // State to track whether it's a follow-up email or not
@@ -26,32 +27,85 @@ const App = () => {
 
   // Load login state from localStorage when the app loads
   useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(loggedIn);
+    const sessionToken = localStorage.getItem("sessionToken");
+    const tokenExpiry = localStorage.getItem("tokenExpiry");
+
+    if (sessionToken && tokenExpiry) {
+      const now = new Date().getTime();
+      if (now < parseInt(tokenExpiry)) {
+        validateSessionToken(sessionToken)
+          .then((isValid) => {
+            if (isValid) {
+              setIsLoggedIn(true);
+            } else {
+              clearSession();
+            }
+          })
+          .catch(() => clearSession())
+          .finally(() => setSessionChecked(true)); // Mark session check as complete
+      } else {
+        clearSession();
+        setSessionChecked(true);
+      }
+    } else {
+      setSessionChecked(true);
+    }
   }, []);
 
-  // Function to handle login (sets both state and localStorage)
-  const handleLogin = (loginState) => {
+  // Function to handle login
+  const handleLogin = (loginState, sessionToken) => {
     setIsLoggedIn(loginState);
-    localStorage.setItem("isLoggedIn", loginState);
+    if (loginState) {
+      const tokenExpiry = new Date().getTime() + 15 * 60 * 1000; // Token valid for 15 min
+      localStorage.setItem("sessionToken", sessionToken);
+      localStorage.setItem("tokenExpiry", tokenExpiry);
+    } else {
+      clearSession();
+    }
   };
+
+  // Simulated function to validate session token
+  const validateSessionToken = async (token) => {
+    // Replace this with actual API validation logic
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(token === "valid_token"), 500); // Simulate a valid token
+    });
+  };
+
+  // Function to clear session
+  const clearSession = () => {
+    localStorage.removeItem("sessionToken");
+    localStorage.removeItem("tokenExpiry");
+    setIsLoggedIn(false);
+  };
+
+  // Render nothing until session validation is complete
+  if (!sessionChecked) {
+    return null; // Render nothing
+  }
 
   return (
     <Router>
       <div className="email-scheduler-container">
-        {isLoggedIn ? (
-          <>
-            {/* Header */}
-            <header className="header">
-              <h1>Email Scheduler</h1>
-            </header>
+        <header className="header">
+          <h1>Email Scheduler</h1>
+        </header>
+        <Routes>
+          {/* Login Page */}
+          {!isLoggedIn && (
+            <Route
+              path="*"
+              element={<LoginPage onLogin={(state) => handleLogin(state, "valid_token")} />}
+            />
+          )}
 
-            {/* Routes for Logged-In Users */}
-            <Routes>
+          {/* Protected Routes */}
+          {isLoggedIn && (
+            <>
               {/* Dashboard Page */}
               <Route path="/dashboard" element={<Dashboard />} />
 
-              {/* Main Page with SingleMailForm, ExcelUpload, and LiveView */}
+              {/* Main Page */}
               <Route
                 path="/"
                 element={
@@ -61,30 +115,25 @@ const App = () => {
                       <SingleMailForm
                         formData={formData}
                         setFormData={setFormData}
-                        isFollowUp={isFollowUp} 
-                        setIsFollowUp={setIsFollowUp} 
+                        isFollowUp={isFollowUp}
+                        setIsFollowUp={setIsFollowUp}
                       />
                       <ExcelUpload />
                     </div>
 
                     {/* Right Column */}
                     <div className="right-column">
-                      <LiveView formData={formData} isFollowUp={isFollowUp} /> 
+                      <LiveView formData={formData} isFollowUp={isFollowUp} />
                     </div>
                   </div>
                 }
               />
 
-              {/* Redirect any other path to the main page */}
+              {/* Redirect invalid routes for logged-in users */}
               <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </>
-        ) : (
-          // Show Login Page if not logged in
-          <Routes>
-            <Route path="*" element={<LoginPage onLogin={handleLogin} />} />
-          </Routes>
-        )}
+            </>
+          )}
+        </Routes>
       </div>
     </Router>
   );
