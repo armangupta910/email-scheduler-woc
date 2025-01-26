@@ -16,7 +16,7 @@ const SingleMailForm = ({ formData, setFormData, isFollowUp, setIsFollowUp }) =>
     setIsFollowUp(!isFollowUp); // Toggle the email type
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const isFormIncomplete = Object.values(formData).some(
@@ -29,21 +29,7 @@ const SingleMailForm = ({ formData, setFormData, isFollowUp, setIsFollowUp }) =>
       const emailType = isFollowUp ? "Follow-Up Email" : "Main Email";
       console.log("Form Data:", formData, "Email Type:", emailType);
       alert(`Your ${emailType} is scheduled.`);
-      try {
-      const response = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData.recipientEmail,
-          salutation: formData.salutation,
-          name: formData.yourName,
-          designation: formData.yourDesignation,
-          company: formData.companyName,
-          phone: formData.yourPhoneNumber,
-        }),
-      });
+
     }
   };
 
