@@ -14,6 +14,21 @@ const LoginPage = ({ onLogin }) => {
       setError("All fields are required.");
       return;
     }
+     try {
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          name,
+          phoneNumber,
+          designation,
+        }),
+      });
+
     if (email === "yash" && password === "123") {
       setError(""); // Clear error
       onLogin(true); // Notify parent of successful login
