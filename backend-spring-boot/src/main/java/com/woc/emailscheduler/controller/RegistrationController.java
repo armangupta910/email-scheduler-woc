@@ -14,7 +14,7 @@ public class RegistrationController {
     @Autowired
     private UserServiceImpl registrationService;
 
-    @PostMapping("/register")
+    @PostMapping("/login")
     public ResponseEntity<String> register(@RequestBody RegistrationDetails rd) {
         // Validate the registration details
         if (rd.getName() == null || rd.getEmailId() == null ||
