@@ -11,7 +11,12 @@ const LoginPage = ({ onLogin }) => {
       setError("Both fields are required.");
       return;
     }
-    onLogin(true);
+    if (email === "yash" && password === "123") {
+      setError(""); // Clear error
+      onLogin(true); // Notify parent of successful login
+    } else {
+      setError("Invalid email or password.");
+    }
   };
 
   return (
@@ -34,12 +39,11 @@ const LoginPage = ({ onLogin }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
-
+  
           {error && <p className="error-message">{error}</p>}
 
           <button onClick={handleLogin} className="login-button">
-            Sign up
+            Login
           </button>
         </div>
       </div>

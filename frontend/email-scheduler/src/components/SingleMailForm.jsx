@@ -29,6 +29,7 @@ const SingleMailForm = ({ formData, setFormData, isFollowUp, setIsFollowUp }) =>
       const emailType = isFollowUp ? "Follow-Up Email" : "Main Email";
       console.log("Form Data:", formData, "Email Type:", emailType);
       alert(`Your ${emailType} is scheduled.`);
+
     }
   };
 
