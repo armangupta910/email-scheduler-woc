@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 @Service
-public class ExcelFeature{
+public class excelfeature{
 
     @Autowired
     private EmailSender emailSender;
