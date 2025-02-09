@@ -1,7 +1,7 @@
 package com.woc.emailscheduler.controller;
 
-import com.woc.emailscheduler.EmailRequest;
 import com.woc.emailscheduler.EmailSender;
+import com.woc.emailscheduler.EmailRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/email")
 public class MailMessage {
+
     @Autowired
     private EmailSender emailSender;
 
+    // Endpoint for sending a single email
     @PostMapping("/send")
     public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
         try {
@@ -30,6 +32,7 @@ public class MailMessage {
         }
     }
 
+    // Method to dynamically compose the email body
     private String composeEmailBody(String company, String salutation, String name, String designation, String phone) {
         return String.format(
                 "Dear %s,\n\n" +
@@ -47,4 +50,3 @@ public class MailMessage {
         );
     }
 }
-
