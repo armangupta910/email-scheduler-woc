@@ -15,7 +15,6 @@ public class EmailSaveService {
 
     private final EmailRepository emailRepository;
     private final EmailSender emailSender;// Inject EmailSender service
-    private final EmailSaveService emailSaveService;
 
     @Autowired
     public EmailSaveService(EmailRepository emailRepository, EmailSender emailSender) {
@@ -35,7 +34,7 @@ public class EmailSaveService {
         }
 
 
-        long totalPendingEmails = emailSaveService.getTotalPendingEmails();
+        long totalPendingEmails = emailSaveService.countPendingEmails();
         return savedEmail;
     }
 
