@@ -20,7 +20,6 @@ public class EmailSaveService {
     public EmailSaveService(EmailRepository emailRepository, EmailSender emailSender) {
         this.emailRepository = emailRepository;
         this.emailSender = emailSender;
-        this.emailSaveService = emailSaveService;
     }
 
     // Save email and schedule/send it
@@ -33,8 +32,7 @@ public class EmailSaveService {
             sendEmailNow(email);
         }
 
-
-        long totalPendingEmails = emailSaveService.countPendingEmails();
+        long totalPendingEmails = emailRepository.countPendingEmails();
         return savedEmail;
     }
 
