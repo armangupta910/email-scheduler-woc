@@ -14,12 +14,14 @@ import java.util.List;
 public class EmailSaveService {
 
     private final EmailRepository emailRepository;
-    private final EmailSender emailSender; // Inject EmailSender service
+    private final EmailSender emailSender;// Inject EmailSender service
+    private final EmailSaveService emailSaveService;
 
     @Autowired
     public EmailSaveService(EmailRepository emailRepository, EmailSender emailSender) {
         this.emailRepository = emailRepository;
         this.emailSender = emailSender;
+        this.emailSaveService = emailSaveService;
     }
 
     // Save email and schedule/send it
@@ -32,6 +34,8 @@ public class EmailSaveService {
             sendEmailNow(email);
         }
 
+
+        long totalPendingEmails = emailSaveService.getTotalPendingEmails();
         return savedEmail;
     }
 
