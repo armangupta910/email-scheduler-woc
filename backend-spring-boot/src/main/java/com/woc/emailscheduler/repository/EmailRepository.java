@@ -18,4 +18,14 @@ public interface EmailRepository extends JpaRepository<Scheduler, Long> {
     @Query("SELECT e FROM Scheduler e WHERE e.status = 'PENDING' AND e.scheduledTime BETWEEN :currentTime AND :cutoffTime ORDER BY e.scheduledTime ASC")
     List<Scheduler> findFutureEmails(@Param("currentTime") LocalDateTime currentTime, @Param("cutoffTime") LocalDateTime cutoffTime);
 
+    @Query("SELECT COUNT(e) FROM Scheduler e WHERE e.status = 'SENT'")
+    long countSentEmails();
+
+    @Query("SELECT COUNT(e) FROM Scheduler e WHERE e.status = 'FAILED'")
+    long countFailedEmails();
+
+    @Query("SELECT COUNT(e) FROM Scheduler e WHERE e.status = 'PENDING'")
+    long countPendingEmails();
+
+
 }

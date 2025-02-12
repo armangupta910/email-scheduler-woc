@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 @RestController
 @RequestMapping("/email")
 public class MailMessage {
@@ -14,9 +18,15 @@ public class MailMessage {
     @Autowired
     private EmailSender emailSender;
 
+    // Counters for email statistics
+    private final AtomicInteger countScheduledEmails = new AtomicInteger(0);
+    private final AtomicInteger countSentEmails = new AtomicInteger(0);
+    private final AtomicInteger countFailedEmails= new AtomicInteger(0);
+
     // Endpoint for sending a single email
     @PostMapping("/send")
     public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
+
         try {
             String emailBody = composeEmailBody(
                     emailRequest.getCompany(),
@@ -26,11 +36,22 @@ public class MailMessage {
                     emailRequest.getPhone()
             );
             emailSender.sendSimpleEmail(emailRequest.getEmail(), "Invitation to Participate in Campus Placement", emailBody);
+            countSentEmails.incrementAndGet(); // Increment the sent emails counter
             return ResponseEntity.ok("Email sent successfully!");
         } catch (Exception e) {
+            countFailedEmails.incrementAndGet(); // Increment the failed emails counter
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error sending email: " + e.getMessage());
         }
     }
+
+    /*@GetMapping("/stats")
+    public ResponseEntity<Map<String, Integer>> getEmailStats() {
+        Map<String, Integer> stats = new HashMap<>();
+        stats.put("totalEmailsScheduled", totalEmailsScheduled.get());
+        stats.put("totalEmailsSent", totalEmailsSent.get());
+        stats.put("totalFailedEmails", totalFailedEmails.get());
+        return ResponseEntity.ok(stats);
+    }*/
 
     // Method to dynamically compose the email body
     private String composeEmailBody(String company, String salutation, String name, String designation, String phone) {

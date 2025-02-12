@@ -14,7 +14,7 @@ import java.util.List;
 public class EmailSaveService {
 
     private final EmailRepository emailRepository;
-    private final EmailSender emailSender; // Inject EmailSender service
+    private final EmailSender emailSender;// Inject EmailSender service
 
     @Autowired
     public EmailSaveService(EmailRepository emailRepository, EmailSender emailSender) {
@@ -32,6 +32,7 @@ public class EmailSaveService {
             sendEmailNow(email);
         }
 
+        long totalPendingEmails = emailRepository.countPendingEmails();
         return savedEmail;
     }
 
