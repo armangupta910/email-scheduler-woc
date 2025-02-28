@@ -44,7 +44,7 @@ public class FollowUpController {
         );
 
         followUpEmail.setBody(followUpBody);
-        followUpEmail.setScheduledTime(followUpRequest.getDateTime()); // Use the provided dateTime
+        followUpEmail.setScheduledTime(followUpRequest.getScheduledTime()); // Use the provided dateTime
         followUpEmail.setStatus("PENDING");
 
         emailRepository.save(followUpEmail);
