@@ -37,7 +37,7 @@ public class ExelEmailsController {
                 while (rows.hasNext()) {
                     Row row = rows.next();
 
-                    String to =row.getCell(0).getStringCellValue();
+                    String email =row.getCell(0).getStringCellValue();
                     String salutation =row.getCell(1).getStringCellValue();
                     String name =row.getCell(2).getStringCellValue();
                     String company =row.getCell(3).getStringCellValue();
@@ -57,7 +57,7 @@ public class ExelEmailsController {
                                         "%s\n" +
                                         "Career Development Cell, IIT Jodhpur\n",
                                 salutation, name, designation, company, phone, name);
-                        emailSender.sendSimpleEmail(to, "Invitation to Participate in Campus Placement", emailText);
+                        emailSender.sendSimpleEmail(email, "Invitation to Participate in Campus Placement", emailText);
                     }
                     //emailSender.sendSimpleEmail(to, subject, emailText);
 

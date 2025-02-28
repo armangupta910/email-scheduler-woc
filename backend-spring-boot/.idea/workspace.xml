@@ -5,19 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4225a6c5-cbc9-4989-b72a-86aebba98ced" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/Application.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/EmailRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/EmailRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/ExelEmailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/ExelEmailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/FollowUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/FollowUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/dto/FollowUpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/dto/FollowUpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/MailConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/MailConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/ExelEmailsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/ExelEmailsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/FollowUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/FollowUpController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/MailMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/MailMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/service/ExcelService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/first/FirstApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/woc/emailscheduler/FirstApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/dto/FollowUpRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/dto/FollowUpRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/repository/EmailRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/repository/EmailRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/service/EmailSaveService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/service/EmailSaveService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/email-scheduler/src/components/SingleMailForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/email-scheduler/src/components/SingleMailForm.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -38,26 +55,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;excel-feature&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/arman_gupta/Documents/GitHub/email-scheduler/backend-spring-boot&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.Application.executor": "Run",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "yash",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ysing/OneDrive/Documents/GitHub/Email-Scheduler-WoC/backend-spring-boot",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="first" />
+      <module name="email-scheduler" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.woc.emailscheduler.Application" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -85,6 +109,7 @@
       <workItem from="1736492985889" duration="25000" />
       <workItem from="1736493014309" duration="152000" />
       <workItem from="1736493184480" duration="110000" />
+      <workItem from="1740644182255" duration="15870000" />
     </task>
     <servers />
   </component>

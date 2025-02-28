@@ -13,7 +13,7 @@ public class EmailRequest {
     private String designation;     // Designation of the person
     private String phone;           // Phone number for contact
     //private LocalDateTime scheduledTime;  // Scheduled time for the email
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm", shape = JsonFormat.Shape.STRING)
     private LocalDateTime scheduledTime;
     // Getters and setters
     public String getEmail() {

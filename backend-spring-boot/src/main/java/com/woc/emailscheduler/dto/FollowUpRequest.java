@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class FollowUpRequest {
     private String company;
-    private LocalDateTime dateTime;
+    private LocalDateTime scheduledTime;
     private String email;
     private String salutation;
     private String name;
@@ -16,9 +16,9 @@ public class FollowUpRequest {
     }
 
     // Parameterized constructor
-    public FollowUpRequest(String company, LocalDateTime dateTime, String email, String salutation, String name, String designation, String phone) {
+    public FollowUpRequest(String company, LocalDateTime scheduledTime, String email, String salutation, String name, String designation, String phone) {
         this.company = company;
-        this.dateTime = dateTime;
+        this.scheduledTime = scheduledTime;
         this.email = email;
         this.salutation = salutation;
         this.name = name;
@@ -35,12 +35,12 @@ public class FollowUpRequest {
         this.company = company;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDateTime getScheduledTime() {
+        return scheduledTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(LocalDateTime scheduledTime) {
+        this.scheduledTime = scheduledTime;
     }
 
     public String getEmail() {
@@ -88,7 +88,7 @@ public class FollowUpRequest {
     public String toString() {
         return "FollowUpRequest{" +
                 "company='" + company + '\'' +
-                ", dateTime=" + dateTime +
+                ", dateTime=" + scheduledTime +
                 ", email='" + email + '\'' +
                 ", salutation='" + salutation + '\'' +
                 ", name='" + name + '\'' +
