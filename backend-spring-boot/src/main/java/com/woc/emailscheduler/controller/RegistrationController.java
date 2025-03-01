@@ -37,7 +37,7 @@ public class RegistrationController {
             @Valid @ModelAttribute RegisterDto registerDto,
             BindingResult result
     ) {
-        RegistrationDetails rd=repo.findByEmail(registerDto.getEmailId());
+        RegistrationDetails rd=repo.findByEmailId(registerDto.getEmailId());
         if(rd!=null){
             result.addError(new FieldError("registerDto", "EmailId", "This Email Id is already registered."));
         }
