@@ -1,29 +1,83 @@
-package com.woc.emailscheduler.service;
+package com.woc.emailscheduler.entity;
 //reg
-import com.woc.emailscheduler.entity.RegistrationDetails;
-import com.woc.emailscheduler.repository.AppUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import jakarta.persistence.*;
 
-@Service
-public class UserServiceImpl implements UserDetailsService {
-    @Autowired
-    private AppUserRepository repo;
+import java.util.Date;
 
-    @Override
-    public UserDetails loadUserByUsername(String EmailId) throws UsernameNotFoundException{
-        RegistrationDetails rd =repo.findByEmail(EmailId);
-        if(rd!=null){
-            return User.withUsername(rd.getEmailId())
-                    .password(rd.getPassword())
-                    .build();
-        }
+@Entity
+@Table(name = "users")
+public class RegistrationDetails {
+   /* Name
+    Phone Number
+    Email
+    Password
+    Designation*/
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String Name;
+    private String PhoneNumber;
+    private String Designation;
+    @Column(unique = true, nullable = false)
+    private String EmailId;
+    private String Password;
+    private Date createdAt;
 
-        return null;
-    }
 
+ public int getId() {
+  return id;
+ }
+
+ public void setId(int id) {
+  this.id = id;
+ }
+
+ public String getName() {return Name;}
+
+ public void setName(String name) {Name = name;}
+
+ public String getPhoneNumber() {
+  return PhoneNumber;
+ }
+
+ public void setPhoneNumber(String phoneNumber) {
+  PhoneNumber = phoneNumber;
+ }
+
+ public String getEmailId() {
+  return EmailId;
+ }
+
+ public void setEmailId(String emailId) {
+  EmailId = emailId;
+ }
+
+ public String getPassword() {
+  return Password;
+ }
+
+ public void setPassword(String password) {
+  Password = password;
+ }
+
+ public String getDesignation() {
+  return Designation;
+ }
+
+ public void setDesignation(String designation) {
+  Designation = designation;
+ }
+
+ /*@Override
+ public String toString() {
+  return "RegistrationDetails{" +
+          "Id=" + id +
+          ", Name='" + Name + '\'' +
+          ", PhoneNumber='" + PhoneNumber + '\'' +
+          ", EmailId='" + EmailId + '\'' +
+          ", Password='" + Password + '\'' +
+          ", Designation='" + Designation + '\'' +
+          '}';
+ }*/
 }
+
