@@ -14,7 +14,7 @@ public class RegisterDto {
     private String Designation;
     @NotEmpty
     @Email
-    private String EmailId;
+    private String emailId;
     @Size (min=6, message = "Minimum password length is 6 characters.")
     private String Password;
 
@@ -35,11 +35,11 @@ public class RegisterDto {
     }
 
     public String getEmailId() {
-        return EmailId;
+        return emailId;
     }
 
     public void setEmailId(String emailId) {
-        EmailId = emailId;
+        this.emailId = emailId;
     }
 
     public String getPassword() {
