@@ -19,7 +19,7 @@ public class RegistrationDetails {
     private String PhoneNumber;
     private String Designation;
     @Column(unique = true, nullable = false)
-    private String EmailId;
+    private String emailId;
     private String Password;
     private Date createdAt;
 
@@ -45,12 +45,12 @@ public class RegistrationDetails {
  }
 
  public String getEmailId() {
-  return EmailId;
+  return emailId;
  }
 
- public void setEmailId(String emailId) {
-  EmailId = emailId;
- }
+public void setEmailId(String mailId) { 
+ emailId=mailId;
+}
 
  public String getPassword() {
   return Password;
