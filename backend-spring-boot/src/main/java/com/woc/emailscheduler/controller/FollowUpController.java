@@ -14,6 +14,7 @@ public class FollowUpController {
 
     @Autowired
     private EmailRepository emailRepository;
+    public int counter=0;
 
     @PostMapping("/followup")
     public String scheduleFollowUpEmail(@RequestBody FollowUpRequest followUpRequest) {
@@ -48,7 +49,7 @@ public class FollowUpController {
         followUpEmail.setStatus("PENDING");
 
         emailRepository.save(followUpEmail);
-
+        counter++;
         return "Follow-up email scheduled successfully.";
     }
 }
