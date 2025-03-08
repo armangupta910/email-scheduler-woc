@@ -1,5 +1,6 @@
 package com.woc.emailscheduler.service;
 
+import com.woc.emailscheduler.dto.CompanyInfoDTO;
 import com.woc.emailscheduler.model.Scheduler;
 import com.woc.emailscheduler.EmailSender;
 import com.woc.emailscheduler.repository.EmailRepository;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class EmailSaveService {
@@ -67,4 +71,24 @@ public class EmailSaveService {
         }
     }
 
+    public List<CompanyInfoDTO> getCompanyInfo() {
+        return emailRepository.findCompanyInfo().stream()
+                .map(record -> {
+                    String body = (String) record[0];
+                    String emailId = (String) record[1];
+                    String companyName = extractCompanyName(body);
+                    return new CompanyInfoDTO(companyName, emailId, (record[2] != null) ? LocalDateTime.parse(record[2].toString()) : null);
+                })
+                .collect(Collectors.toList());
+    }
+
+    public String extractCompanyName(String emailBody) {
+        Pattern pattern = Pattern.compile("invite\\s+(\\S+)");
+        Matcher matcher = pattern.matcher(emailBody);
+
+        if (matcher.find()) {
+            return matcher.group(1).trim();  // Extracted single word after "invite"
+        }
+        return "Unknown Company";  // Default if no match found
+    }
 }
