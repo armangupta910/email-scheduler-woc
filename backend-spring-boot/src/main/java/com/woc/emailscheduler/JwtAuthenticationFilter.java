@@ -30,8 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getRequestURI();
-        return path.startsWith("/auth/") || path.startsWith("/email/") || path.startsWith("/stats/");
+        // Allow CORS preflight requests to bypass authentication
+        return "OPTIONS".equalsIgnoreCase(request.getMethod());
     }
 
     @Override
@@ -54,16 +54,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     }
                 }
             } catch (ExpiredJwtException e) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-                response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token has expired");
+                handleCorsError(response, HttpServletResponse.SC_UNAUTHORIZED, "Token has expired");
                 return;
             } catch (Exception e) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-                response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
+                handleCorsError(response, HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
                 return;
             }
         }
@@ -74,5 +68,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private String extractToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         return (authHeader != null && authHeader.startsWith("Bearer ")) ? authHeader.substring(7) : null;
+    }
+
+    private void handleCorsError(HttpServletResponse response, int status, String message) throws IOException {
+        response.setStatus(status);
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3002");  // Update with your frontend URL
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+        response.getWriter().write(message);
     }
 }

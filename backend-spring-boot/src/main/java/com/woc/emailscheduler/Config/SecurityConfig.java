@@ -22,6 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 public class SecurityConfig {
@@ -35,27 +36,31 @@ public class SecurityConfig {
     }
 
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE) // ✅ Ensures CORS is processed first
+    @Order(Ordered.HIGHEST_PRECEDENCE) // Ensures CORS is processed first
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)  // ✅ Disable CSRF for APIs
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ Apply CORS correctly
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // ✅ Stateless session
+                .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF for APIs
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Apply CORS configuration
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow preflight requests
                         .requestMatchers(
                                 "/auth/register", "/auth/login",
                                 "/email/send", "/email/followup", "/email/schedule",
                                 "/email/bulk/send", "/email/follow/send",
                                 "/stats/companies", "/stats/counts"
-                        ).permitAll()  // ✅ Make endpoints public
-                        .anyRequest().authenticated()  // ✅ Secure all other endpoints
+                        ).permitAll()  // Make public endpoints
+                        .anyRequest().authenticated()  // Secure all other endpoints
                 )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, authException) -> {
+                            response.setHeader("Access-Control-Allow-Origin", "*");  // Allow frontend access
+                            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+                            response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
                             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
                         })
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);  // ✅ Add JWT filter
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);  // Add JWT filter
 
         return http.build();
     }
@@ -73,15 +78,18 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ Correctly Implemented CORS Configuration
+    // CORS Configuration
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("*")); // ✅ Allow all origins
-        config.setAllowedHeaders(List.of("*")); // ✅ Allow all headers
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // ✅ Allow necessary methods
+        config.setAllowCredentials(true);  // Allow credentials (cookies, auth tokens)
 
+        // Change "*" to your frontend's URL for better security
+        config.setAllowedOrigins(List.of("http://localhost:3002", "https://your-frontend-domain.com")); // Allow only specific origins
+        config.setAllowedHeaders(List.of("*")); // Allow all headers
+        config.setAllowedMethods(List.of("*")); // Allow all methods
+
+        // Register CORS configuration for the entire application
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
