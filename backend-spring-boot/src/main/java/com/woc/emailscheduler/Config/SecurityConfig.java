@@ -20,9 +20,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+
 import java.util.List;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpMethod;
+
 
 @Configuration
 public class SecurityConfig {
@@ -54,9 +56,7 @@ public class SecurityConfig {
                 )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, authException) -> {
-                            response.setHeader("Access-Control-Allow-Origin", "*");  // Allow frontend access
-                            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-                            response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+                            setCorsHeaders(response);
                             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
                         })
                 )
@@ -84,14 +84,21 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);  // Allow credentials (cookies, auth tokens)
 
-        // Change "*" to your frontend's URL for better security
-        config.setAllowedOrigins(List.of("http://localhost:3002", "https://your-frontend-domain.com")); // Allow only specific origins
-        config.setAllowedHeaders(List.of("*")); // Allow all headers
-        config.setAllowedMethods(List.of("*")); // Allow all methods
+        // Allow frontend origins
+        config.setAllowedOrigins(List.of("http://localhost:3002", "https://your-frontend-domain.com"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
         // Register CORS configuration for the entire application
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
+    }
+
+    // Helper method to set CORS headers for error responses
+    private void setCorsHeaders(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
     }
 }
