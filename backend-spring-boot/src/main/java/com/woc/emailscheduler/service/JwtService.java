@@ -14,9 +14,16 @@ public class JwtService {
     @Value("${jwt.secret}") // Load secret from application.properties
     private String secretKey;
 
-    private String getEncodedSecret() {
-        return Base64.getEncoder().encodeToString(secretKey.getBytes());
+    // Make sure the secret key is 256 bits (32 bytes) long by directly using the bytes.
+    private byte[] getSecretKey() {
+        byte[] secretKeyBytes = secretKey.getBytes();
+        System.out.println("Secret key length: " + secretKeyBytes.length);
+        if (secretKeyBytes.length < 32) {
+            throw new IllegalArgumentException("Secret key must be at least 256 bits (32 bytes) long.");
+        }
+        return secretKeyBytes;
     }
+
 
     // ✅ Generate Token
     public String generateToken(UserDetails userDetails) {
@@ -24,8 +31,22 @@ public class JwtService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
-                .signWith(SignatureAlgorithm.HS256, getEncodedSecret()) // Encode secret
+                .signWith(SignatureAlgorithm.HS256, getSecretKey()) // Use raw bytes for the secret key
                 .compact();
+    }
+
+    // ✅ Validate Token and refresh if expired
+    public String validateTokenAndRefresh(String token, UserDetails userDetails) {
+        if (isTokenExpired(token)) {
+            // If the token is expired, generate a new one
+            return generateToken(userDetails);
+        } else if (validateToken(token, userDetails)) {
+            // If valid, return the same token
+            return token;
+        } else {
+            // Invalid token case, returning null or throw exception as per your use case
+            return null;
+        }
     }
 
     // ✅ Validate Token
@@ -47,7 +68,7 @@ public class JwtService {
     // ✅ Generic Claim Extraction
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = Jwts.parser()
-                .setSigningKey(getEncodedSecret())
+                .setSigningKey(getSecretKey()) // Use raw bytes for secret key
                 .parseClaimsJws(token)
                 .getBody();
         return claimsResolver.apply(claims);
@@ -56,5 +77,10 @@ public class JwtService {
     // ✅ Check if Token is Expired
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
+    }
+
+    // ✅ Refresh Token if expired (helper method for regenerating token)
+    public String refreshToken(UserDetails userDetails) {
+        return generateToken(userDetails);
     }
 }
