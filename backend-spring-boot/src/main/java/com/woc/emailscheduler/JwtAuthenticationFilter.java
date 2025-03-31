@@ -30,9 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getRequestURI();
-        // Allowing public endpoints to bypass JWT check
-        return path.startsWith("/auth/") || path.startsWith("/email/") || path.startsWith("/stats/");
+        // Allow CORS preflight requests to bypass authentication
+        return "OPTIONS".equalsIgnoreCase(request.getMethod());
     }
 
     @Override
@@ -55,12 +54,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     }
                 }
             } catch (ExpiredJwtException e) {
-                setCorsHeaders(response);
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token has expired");
+                handleCorsError(response, HttpServletResponse.SC_UNAUTHORIZED, "Token has expired");
                 return;
             } catch (Exception e) {
-                setCorsHeaders(response);
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
+                handleCorsError(response, HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
                 return;
             }
         }
@@ -70,14 +67,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String extractToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
-        // Extract token from "Authorization" header
         return (authHeader != null && authHeader.startsWith("Bearer ")) ? authHeader.substring(7) : null;
     }
 
-    // Set CORS headers in case of errors (Expired or Invalid tokens)
-    private void setCorsHeaders(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");  // Adjust based on your needs
+    private void handleCorsError(HttpServletResponse response, int status, String message) throws IOException {
+        response.setStatus(status);
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3002");  // Update with your frontend URL
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+        response.getWriter().write(message);
     }
 }
