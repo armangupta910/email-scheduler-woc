@@ -42,4 +42,9 @@ public class EmailStatsController {
         List<CompanyInfoDTO> companyInfoList = emailService.getCompanyInfo();
         return companyInfoList;
     }
+    @GetMapping("/companies/followup")
+    public List<CompanyInfoDTO> getFollowUpCompanyStats() {
+        return emailService.getFollowUpCompanyInfo();
+    }
+
 }
