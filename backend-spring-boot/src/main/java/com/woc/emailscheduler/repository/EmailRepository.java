@@ -27,6 +27,16 @@ public interface EmailRepository extends JpaRepository<Scheduler, Long> {
     @Query("SELECT COUNT(e) FROM Scheduler e WHERE e.status = 'pending'")
     long countPendingEmails();
 
+    @Query("SELECT COUNT(e) FROM Scheduler e WHERE LOWER(e.subject) LIKE 'follow-up:%' AND e.status = 'sent'")
+    long countFollowupEmailsSent();
+
+    @Query("SELECT COUNT(e) FROM Scheduler e WHERE LOWER(e.subject) LIKE 'follow-up:%' AND e.status = 'failed'")
+    long countFailedFollowupEmails();
+
+    @Query("SELECT COUNT(e) FROM Scheduler e WHERE LOWER(e.subject) LIKE 'follow-up:%' AND e.status = 'pending'")
+    long countFollowupScheduled();
+
+
     @Query("SELECT e.body, e.recipientEmail, MAX(e.scheduledTime) " +
             "FROM Scheduler e " +
             "GROUP BY e.body, e.recipientEmail")
