@@ -12,6 +12,6 @@ public class CompanyController {
     @GetMapping("/company-info")
     @PreAuthorize("hasRole('ADMIN')")  // Only Admins can access this
     public String getCompanyInfo() {
-        return "Company Info: Name, Email, Last Scheduled Time";
+        return "Company Name, Email ID, Last Scheduled Time";
     }
 }

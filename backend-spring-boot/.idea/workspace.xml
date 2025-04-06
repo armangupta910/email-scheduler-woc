@@ -5,24 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4225a6c5-cbc9-4989-b72a-86aebba98ced" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/EmailRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/EmailRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/Config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/CompanyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/ExelEmailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/ExelEmailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/FollowUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/FollowUpController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/dto/FollowUpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/dto/FollowUpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/FollowUpExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/woc/emailscheduler/controller/FollowUpExcel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/EmailRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/Config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/Config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/WebConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/CompanyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/CompanyController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/ExelEmailsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/ExelEmailsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/FollowUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/FollowUpController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/MailMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/MailMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/dto/FollowUpRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/dto/FollowUpRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/repository/EmailRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/repository/EmailRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/service/EmailSaveService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/service/EmailSaveService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/email-scheduler/src/components/SingleMailForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/email-scheduler/src/components/SingleMailForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/FollowUpExcel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/woc/emailscheduler/controller/FollowUpExcel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +59,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.Application.executor": "Run",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "yash",
+    "git-widget-placeholder": "fix__bulk",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/ysing/OneDrive/Documents/GitHub/Email-Scheduler-WoC/backend-spring-boot",
     "node.js.detected.package.eslint": "true",
