@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,6 +82,35 @@ public class EmailSaveService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public List<CompanyInfoDTO> getFollowUpCompanyInfo() {
+        List<Object[]> results = emailRepository.findFollowupCompanyInfo();
+        List<CompanyInfoDTO> dtoList = new ArrayList<>();
+
+        for (Object[] row : results) {
+            String email = (String) row[0];
+            String body = (String) row[1];
+            LocalDateTime time = (LocalDateTime) row[2];
+
+            // Extract company name from body (you could extract more precisely if needed)
+            String company = extractCompanyNameFromBody(body);
+            dtoList.add(new CompanyInfoDTO(company, email, time));
+        }
+
+        return dtoList;
+    }
+
+    // Example logic (you can customize this based on your template)
+    private String extractCompanyNameFromBody(String body) {
+        try {
+            int start = body.indexOf("extended to ") + 12;
+            int end = body.indexOf(" for \"IIT Jodhpur");
+            return body.substring(start, end).trim();
+        } catch (Exception e) {
+            return "Unknown";
+        }
+    }
+
 
     public String extractCompanyName(String emailBody) {
         Pattern pattern = Pattern.compile("invite\\s+(\\S+)");
