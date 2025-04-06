@@ -31,9 +31,9 @@ public class EmailStatsController {
         counts.put("totalEmailsSent", emailRepository.countSentEmails());
         counts.put("totalEmailsScheduled", emailRepository.countPendingEmails());
         counts.put("failedEmails", emailRepository.countFailedEmails());
-        //counts.put("totalFollowupEmailsSent", emailRepository.countFollowupEmailsSent());
-        counts.put("totalFollowupScheduled", (long) followUpController.counter);
-        //counts.put("failedFollowupEmails", emailRepository.countFailedFollowupEmails());
+        counts.put("totalFollowupEmailsSent", emailRepository.countFollowupEmailsSent());
+        counts.put("totalFollowupScheduled", emailRepository.countFollowupScheduled());
+        counts.put("failedFollowupEmails", emailRepository.countFailedFollowupEmails());
 
         return counts;
     }
