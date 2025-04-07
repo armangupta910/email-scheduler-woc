@@ -20,7 +20,7 @@ public class FollowUpExcel {
     private EmailSender emailSender;
 
     @PostMapping(value = "/send", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> sendEmailsViaExcel(@RequestParam("followfile") MultipartFile file) {
+    public ResponseEntity<String> sendEmailsViaExcel(@RequestParam("file") MultipartFile file) {
         try {
             if (file.isEmpty()) {
                 return ResponseEntity.badRequest().body("File is missing!");
@@ -45,10 +45,16 @@ public class FollowUpExcel {
                     String to = row.getCell(0).getStringCellValue();
                     String name = row.getCell(1).getStringCellValue();
                     String company = row.getCell(2).getStringCellValue();
-                    String phone = row.getCell(3).getStringCellValue();
+                    Cell phoneCell = row.getCell(3);
+                    String phone = "";
+
+                    if (phoneCell != null && phoneCell.getCellType() == CellType.NUMERIC) {
+                        // Convert numeric value to long (to remove decimal places) and then to string
+                        phone = String.valueOf((long) phoneCell.getNumericCellValue());
+                    }
 
                     String emailText = String.format("Dear Team,\n" +
-                                    "This is a follow-up email to our previous email regarding the invitation extended to %s for \"IIT Jodhpur's placement and internship season 2025-26\". Do let me know in case of any developments. We would like to empanel Verizon and establish a long-term association with you. In case of any query, do feel free to reach out to us.\n" +
+                                    "This is a follow-up email to our previous email regarding the invitation extended to %s for \"IIT Jodhpur's placement and internship season 2025-26\". Do let me know in case of any developments. We would like to empanel %s and establish a long-term association with you. In case of any query, do feel free to reach out to us.\n" +
                                     "\n" +
                                     "Look forward to hearing from you.\n" +
                                     "--\n" +
@@ -57,7 +63,7 @@ public class FollowUpExcel {
                                     "Internship Coordinator\n" +
                                     "Career Development Cell | IIT Jodhpur\n" +
                                     "Contact : %s",
-                            company, name, phone);
+                            company, company, name, phone);
                     emailSender.sendSimpleEmail(to, "Invitation to Participate in Campus Placement", emailText);
                 }
                 return ResponseEntity.ok("Bulk Follow Up Emails sent successfully.");

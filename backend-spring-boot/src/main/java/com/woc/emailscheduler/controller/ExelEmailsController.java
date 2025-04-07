@@ -42,7 +42,13 @@ public class ExelEmailsController {
                     String name =row.getCell(2).getStringCellValue();
                     String company =row.getCell(3).getStringCellValue();
                     String designation =row.getCell(4).getStringCellValue();
-                    String phone =row.getCell(5).getStringCellValue();
+                    Cell phoneCell = row.getCell(5);
+                    String phone = "";
+
+                    if (phoneCell != null && phoneCell.getCellType() == CellType.NUMERIC) {
+                        // Convert numeric value to long (to remove decimal places) and then to string
+                        phone = String.valueOf((long) phoneCell.getNumericCellValue());
+                    }
 
 
                         String emailText = String.format("Dear %s,\n\n" +

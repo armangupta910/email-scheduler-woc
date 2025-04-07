@@ -85,7 +85,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);  // Allow credentials (cookies, auth tokens)
 
         // Allow frontend origins
-        config.setAllowedOrigins(List.of("http://localhost:3002", "https://your-frontend-domain.com"));
+        config.setAllowedOrigins(List.of("http://localhost:3005", "https://your-frontend-domain.com"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
