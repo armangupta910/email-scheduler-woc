@@ -4,32 +4,79 @@ import "../styles/SingleMailForm.css";
 const SingleMailForm = ({ formData, setFormData, isFollowUp, setIsFollowUp }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "yourPhoneNumber") {
-      if (!/^\d*$/.test(value)) {
-        return; // Prevent invalid input
-      }
+    if (name === "yourPhoneNumber" && !/^\d*$/.test(value)) {
+      return; // Prevent invalid input for phone number
     }
     setFormData({ ...formData, [name]: value });
   };
 
   const handleToggle = () => {
-    setIsFollowUp(!isFollowUp); // Toggle the email type
+    setIsFollowUp(!isFollowUp); // Toggle between main and follow-up email
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const isFormIncomplete = Object.values(formData).some(
-      (value) => value.trim() === ""
-    );
-
+    // Validate form fields (ensure no empty fields)
+    const isFormIncomplete = Object.values(formData).some((value) => value.trim() === "");
     if (isFormIncomplete) {
       alert("The form is incomplete. Please fill in all fields.");
-    } else {
-      const emailType = isFollowUp ? "Follow-Up Email" : "Main Email";
-      console.log("Form Data:", formData, "Email Type:", emailType);
-      alert(`Your ${emailType} is scheduled.`);
+      return;
+    }
 
+    // Retrieve token from localStorage
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Authentication error: Please log in again.");
+      return;
+    }
+
+    // Determine API endpoint
+    const apiUrl = isFollowUp
+      ? "http://localhost:8080/email/followup"
+      : "http://localhost:8080/email/schedule";
+
+    // Prepare request body
+    const requestData = {
+      company: formData.companyName,
+      scheduledTime: formData.dateTime,
+      email: formData.recipientEmail,
+      salutation: formData.salutation,
+      name: formData.yourName,
+      designation: formData.yourDesignation,
+      phone: formData.yourPhoneNumber,
+    };
+
+    try {
+      console.log("Sending request to:", apiUrl, "with data:", requestData);
+      
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include token in request headers
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      let data;
+      try {
+        data = await response.json(); // Try parsing JSON response
+      } catch (error) {
+        console.error("Invalid JSON response from backend:", error);
+        data = { error: "Invalid response from server. Please try again later." };
+      }
+
+      if (response.ok) {
+        alert(data.message || "Email scheduled successfully!");
+        console.log("Email scheduled successfully:", data);
+      } else {
+        alert(`Error: ${data.error || "Unknown error occurred"}`);
+        console.error("Error scheduling email:", data);
+      }
+    } catch (error) {
+      alert("A network error occurred. Please check your connection.");
+      console.error("Network error:", error);
     }
   };
 
@@ -99,14 +146,10 @@ const SingleMailForm = ({ formData, setFormData, isFollowUp, setIsFollowUp }) =>
           onChange={handleChange}
         />
 
-        {/* Toggle Switch */}
+        {/* Toggle Switch for Main/Follow-Up Email */}
         <div className="email-options">
           <label className="toggle-switch">
-            <input
-              type="checkbox"
-              checked={isFollowUp} // Toggle state
-              onChange={handleToggle} // Handle toggle change
-            />
+            <input type="checkbox" checked={isFollowUp} onChange={handleToggle} />
             <span className="slider"></span>
           </label>
           <span>{isFollowUp ? "Follow-Up Email" : "Main Email"}</span>
