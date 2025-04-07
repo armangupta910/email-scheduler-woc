@@ -4,8 +4,8 @@ html {
 
 .dashboard {
     text-align: center;
-    height: 85vh;
-    margin-top: 70px;
+    height: 100%;
+    margin-top: 30px;
     padding: 15px;
     background-color: #e8f0fe;
     border-radius: 8px;
@@ -17,55 +17,358 @@ html {
 
 .stats-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 100%;
-    max-width: 100%;
     padding: 10px;
     box-sizing: border-box;
 }
 
 .stat-box {
-    margin-right: 20px;
+    margin-left: 25px;
+    margin-right: 35px;
     margin-bottom: 20px;
     background-color: white;
     border-radius: 8px;
     padding: 8px;
     text-align: center;
-    min-width: 0;
-    height: 145px;
+    width: 350x;
+    height: 155px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.other-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    width: 100%;
+    padding: 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+    gap: 25px;
+}
+
+.stats-box {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    width: 90%;
+    max-width: 1200px; /* Increased max-width for better table display */
+    height: auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
 .stat-box h3 {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 10px;
     color: #333;
 }
 
 .stat-box p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  background-clip: text;             
+  -webkit-background-clip: text;      
+  -webkit-text-fill-color: transparent;
+  color: transparent;                
+}
+
+
+.stats-box h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.stats-box p {
     font-size: 24px;
     font-weight: bold;
     margin: 0;
     padding: 15px;
-    color: #007bff;
 }
 
-@media (max-width: 1200px) {
-    .stats-container {
-        grid-template-columns: repeat(4, 1fr);
-    }
+
+.table-container {
+    max-height: unset;
+    overflow-y: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+.hidden-row {
+    display: none; 
 }
+
+.email-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.email-table th, .email-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.email-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.email-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.email-table input[type="datetime-local"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.email-table .reschedule-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-size: 16px;
+    padding: 10px 16px;
+    text-align: center;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* 3D shadow */
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    top: 0;
+  }
+  
+  .email-table .reschedule-btn:hover {
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .email-table .reschedule-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+
+/* Back Button */
+.back-button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    margin-top: 15px;
+    width: 135px;
+    right: 30px;
+    padding: 13px 20px;
+    font-size: 18px;
+  }
+  
+  .back-button:hover {
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .back-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  .scroll-enabled {
+    max-height: 300px; /* Adjust height as needed */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+  }
+  
+  .view-more-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+    padding-right: 10px;
+  }
+  
+  .view-more-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+    margin-left: 1100px;
+    transition: background 0.3s, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .view-more-btn:hover {
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .view-more-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  @media (max-width: 768px) {
+    .table-container {
+      max-height: 200px; /* Adjust height for smaller screens */
+    }
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .back-button {
+      top: 15px;
+      right: 15px;
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .back-button {
+      top: 10px;
+      right: 10px;
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  }
+  
 
 @media (max-width: 768px) {
-    .stats-container {
-        grid-template-columns: repeat(2, 1fr);
+    .email-table {
+        font-size: 14px;
+    }
+    
+    .email-table th, .email-table td {
+        padding: 6px;
     }
 }
 
 @media (max-width: 480px) {
-    .stats-container {
-        grid-template-columns: 1fr;
+    .email-table {
+        font-size: 12px;
+    }
+    
+    .email-table th, .email-table td {
+        padding: 4px;
     }
 }
+
+@media (max-width: 1200px) {
+    .stats-box {
+        width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+    .email-table {
+        font-size: 14px;
+    }
+    
+    .email-table th, .email-table td {
+        padding: 6px;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+
+  .modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;         /* Align label text to the left */
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .modal-content input {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .modal-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 45px;                 /* Reasonable gap between Cancel & Submit buttons */
+    margin-top: 24px;
+    margin-left: 80px;
+  }
+  
+  .modal-actions button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    min-width: 100px;
+    text-align: center;
+  }
+  
+  .modal-actions button:hover {
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-actions button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  

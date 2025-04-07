@@ -43,18 +43,29 @@
 .single-mail-form button {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: #fff;
   border: none;
   border-radius: 5px;
   font-size: 20px;
   cursor: pointer;
   margin-top: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* 3D shadow */
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .single-mail-form button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
 }
+
+.single-mail-form button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 
 .email-options {
   display: flex;

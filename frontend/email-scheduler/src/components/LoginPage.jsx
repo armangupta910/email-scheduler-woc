@@ -2,20 +2,40 @@ import React, { useState } from "react";
 import "../styles/LoginPage.css";
 
 const LoginPage = ({ onLogin }) => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(""); 
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
-    if (!email || !password) {
+  const handleLogin = async () => {
+    if (!username || !password) {
       setError("Both fields are required.");
       return;
     }
-    if (email === "yash" && password === "123") {
-      setError(""); // Clear error
-      onLogin(true); // Notify parent of successful login
-    } else {
-      setError("Invalid email or password.");
+
+    try {
+      const response = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username, 
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token); // Store JWT token
+        setError("");
+        alert("Login Successful!");
+        onLogin(true); // Notify parent that login was successful
+      } else {
+        setError(data.message || "Invalid username or password.");
+      }
+    } catch (err) {
+      setError("Error connecting to the server. Please try again.");
     }
   };
 
@@ -27,10 +47,10 @@ const LoginPage = ({ onLogin }) => {
 
         <div className="form-container">
           <input
-            type="email"
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Username"
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)} // Updated state setter
           />
 
           <input
@@ -39,7 +59,7 @@ const LoginPage = ({ onLogin }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-  
+
           {error && <p className="error-message">{error}</p>}
 
           <button onClick={handleLogin} className="login-button">

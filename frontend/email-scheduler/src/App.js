@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import "./styles/App.css";
 import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
 import Dashboard from "./components/Dashboard";
 import SingleMailForm from "./components/SingleMailForm";
 import ExcelUpload from "./components/ExcelUpload";
@@ -9,9 +10,9 @@ import LiveView from "./components/LiveView";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [sessionChecked, setSessionChecked] = useState(false); // Track if session check is complete
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [sessionChecked, setSessionChecked] = useState(false);
 
-  // State to hold form data for live preview
   const [formData, setFormData] = useState({
     companyName: "",
     recipientEmail: "",
@@ -22,13 +23,16 @@ const App = () => {
     yourPhoneNumber: "",
   });
 
-  // State to track whether it's a follow-up email or not
   const [isFollowUp, setIsFollowUp] = useState(false);
 
-  // Load login state from localStorage when the app loads
   useEffect(() => {
     const sessionToken = localStorage.getItem("sessionToken");
     const tokenExpiry = localStorage.getItem("tokenExpiry");
+    const userRegistered = localStorage.getItem("userRegistered");
+
+    if (userRegistered) {
+      setIsRegistered(true);
+    }
 
     if (sessionToken && tokenExpiry) {
       const now = new Date().getTime();
@@ -42,7 +46,7 @@ const App = () => {
             }
           })
           .catch(() => clearSession())
-          .finally(() => setSessionChecked(true)); // Mark session check as complete
+          .finally(() => setSessionChecked(true));
       } else {
         clearSession();
         setSessionChecked(true);
@@ -52,11 +56,15 @@ const App = () => {
     }
   }, []);
 
-  // Function to handle login
+  const handleRegister = () => {
+    setIsRegistered(true);
+    localStorage.setItem("userRegistered", "true");
+  };
+
   const handleLogin = (loginState, sessionToken) => {
     setIsLoggedIn(loginState);
     if (loginState) {
-      const tokenExpiry = new Date().getTime() + 15 * 60 * 1000; // Token valid for 15 min
+      const tokenExpiry = new Date().getTime() + 60 * 60 * 1000;
       localStorage.setItem("sessionToken", sessionToken);
       localStorage.setItem("tokenExpiry", tokenExpiry);
     } else {
@@ -64,24 +72,22 @@ const App = () => {
     }
   };
 
-  // Simulated function to validate session token
   const validateSessionToken = async (token) => {
-    // Replace this with actual API validation logic
     return new Promise((resolve) => {
-      setTimeout(() => resolve(token === "valid_token"), 500); // Simulate a valid token
+      setTimeout(() => resolve(token === "valid_token"), 500);
     });
   };
 
-  // Function to clear session
   const clearSession = () => {
     localStorage.removeItem("sessionToken");
     localStorage.removeItem("tokenExpiry");
+    localStorage.removeItem("userRegistered");
     setIsLoggedIn(false);
+    setIsRegistered(false);
   };
 
-  // Render nothing until session validation is complete
   if (!sessionChecked) {
-    return null; // Render nothing
+    return null;
   }
 
   return (
@@ -90,52 +96,72 @@ const App = () => {
         <header className="header">
           <h1>Email Scheduler</h1>
         </header>
+
+        {isLoggedIn && <DashboardLogoutButtons onLogout={clearSession} />}
+
         <Routes>
-          {/* Login Page */}
-          {!isLoggedIn && (
-            <Route
-              path="*"
-              element={<LoginPage onLogin={(state) => handleLogin(state, "valid_token")} />}
-            />
-          )}
+  {sessionChecked && !isRegistered && (
+    <Route path="*" element={<RegisterPage onRegister={handleRegister} />} />
+  )}
+  {sessionChecked && isRegistered && !isLoggedIn && (
+    <Route path="*" element={<LoginPage onLogin={(state) => handleLogin(state, "valid_token")} />} />
+  )}
+  {sessionChecked && isLoggedIn && (
+    <>
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+        path="/"
+        element={
+          <MainPage
+            formData={formData}
+            setFormData={setFormData}
+            isFollowUp={isFollowUp}
+            setIsFollowUp={setIsFollowUp}
+          />
+        }
+      />
+      <Route path="*" element={<Navigate to="/" />} />
+    </>
+  )}
+</Routes>
 
-          {/* Protected Routes */}
-          {isLoggedIn && (
-            <>
-              {/* Dashboard Page */}
-              <Route path="/dashboard" element={<Dashboard />} />
-
-              {/* Main Page */}
-              <Route
-                path="/"
-                element={
-                  <div className="content-section">
-                    {/* Left Column */}
-                    <div className="left-column">
-                      <SingleMailForm
-                        formData={formData}
-                        setFormData={setFormData}
-                        isFollowUp={isFollowUp}
-                        setIsFollowUp={setIsFollowUp}
-                      />
-                      <ExcelUpload />
-                    </div>
-
-                    {/* Right Column */}
-                    <div className="right-column">
-                      <LiveView formData={formData} isFollowUp={isFollowUp} />
-                    </div>
-                  </div>
-                }
-              />
-
-              {/* Redirect invalid routes for logged-in users */}
-              <Route path="*" element={<Navigate to="/" />} />
-            </>
-          )}
-        </Routes>
       </div>
     </Router>
+  );
+};
+
+const DashboardLogoutButtons = ({ onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout();
+    navigate("/login");
+  };
+
+  return (
+    <div className="dashboard-button-container">
+      <button className="dashboard-button" onClick={() => navigate("/dashboard")}>Go to Dashboard</button>
+      <button className="logout-button" onClick={handleLogout}>Logout</button>
+    </div>
+  );
+};
+
+const MainPage = ({ formData, setFormData, isFollowUp, setIsFollowUp }) => {
+  return (
+    <div className="content-section">
+      <div className="left-column">
+        <SingleMailForm
+          formData={formData}
+          setFormData={setFormData}
+          isFollowUp={isFollowUp}
+          setIsFollowUp={setIsFollowUp}
+        />
+        <ExcelUpload />
+      </div>
+      <div className="right-column">
+        <LiveView formData={formData} isFollowUp={isFollowUp} />
+      </div>
+    </div>
   );
 };
 
